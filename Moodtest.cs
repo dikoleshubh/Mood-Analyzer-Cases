@@ -11,14 +11,13 @@ namespace Mood_Test
         public string message;  
 
 
-        public MoodAnalyzer(string message) 
+        public MoodAnalyzer(string message) //parameterized constructor for intilizing instance member
         {
             this.message = message;
         }
-        public string Analyzer()  //Analyzer method find mood
+        public string Analyzer()  //Analyzer method analyze mood using if else
         {
-            try  // Handling Exception
-            {
+            
                 if (this.message.ToLower().Contains("happy"))
                 {
                     return "happy";
@@ -27,13 +26,8 @@ namespace Mood_Test
                 {
                     return "sad";
                 }
-            }
-            catch
-            //UC2 use --> //catch(NullReferenceException ex)
-            {
-                //UC2 use -->// return ex.Message;
-                return "happy";
-            }
+            
+            
         }
     }
 }
