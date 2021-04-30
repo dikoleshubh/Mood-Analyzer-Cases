@@ -19,20 +19,28 @@ namespace Mood_Test
         {
             try  // Handling Exception
             {
-                if (this.message.ToLower().Contains("happy"))
+                if (this.message.Equals(string.Empty))
                 {
-                    return "happy";
+
+                    throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.EMPTY_EXCEPTION, "Mood should not be empty");
                 }
                 else
                 {
-                    return "sad";
+                    if (this.message.ToLower().Contains("happy"))
+                    {
+                        return "happy";
+                    }
+                    else
+                    {
+                        return "sad";
+                    }
                 }
             }
-            catch
-            
+            catch (NullReferenceException ex)
             {
                 //UC2 use -->// return ex.Message;
-                return "happy";
+                // return "happy";
+                throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.NULL_EXCEPTION, "Mood should not be null");
             }
         }
     }
