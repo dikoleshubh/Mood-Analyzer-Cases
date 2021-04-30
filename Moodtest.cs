@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +8,17 @@ namespace Mood_Test
 {
     public class MoodAnalyzer
     {
-        public string message;  
+        public string message;  //instance variable
 
 
-        public MoodAnalyzer(string message) 
+        public MoodAnalyzer() //Constructors
+        {
+
+        }
+        public MoodAnalyzer(string message) //parameterized constructor 
         {
             this.message = message;
+            //this.methodName = methodName;
         }
         public string Analyzer()  //Analyzer method find mood
         {
@@ -38,7 +43,7 @@ namespace Mood_Test
             }
             catch (NullReferenceException ex)
             {
-                //UC2 use -->// return ex.Message;
+                
                 // return "happy";
                 throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.NULL_EXCEPTION, "Mood should not be null");
             }
