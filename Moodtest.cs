@@ -29,7 +29,7 @@ namespace Mood_Test
                 }
             }
             catch
-            //UC2 use --> //catch(NullReferenceException ex)
+            
             {
                 //UC2 use -->// return ex.Message;
                 return "happy";
