@@ -15,7 +15,7 @@ namespace Mood_Test
         {
             this.message = message;
         }
-        public string Analyzer()  //Analyzer method find mood
+        public string Analyzer()  
         {
             try  // Handling Exception
             {
