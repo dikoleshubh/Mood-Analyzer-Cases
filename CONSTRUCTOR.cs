@@ -6,33 +6,34 @@ namespace Mood_Test
 {
     public class MoodAnalyzerFactory
     {
-        public object CreateMoodAnalyzerObject(string className, string constructor)
+
+        /* UC5:- create Parameter Constructor Use Reflection to Create MoodAnalyser with Parameter Constructor.
+                 - Use MoodAnalyserFactory to create MoodAnalyser Object with Message Parameneter.
+         */
+        public Object CreateMoodAnalyzerParameterObject(string className, string constructorName, string message)
         {
-            //MoodAnalyzerProblem.MoodAnalyzer
-            string pattern = @"." + constructor + "$";
-            Match result = Regex.Match(className, pattern); //regex predefine class .pattern matching store result suppose pattern matching then create object than an constructor
+            Type type = typeof(MoodAnalyzer);
 
-            if (result.Success)
+            if (type.Name.Equals(className) || type.FullName.Equals(className))
             {
-                try
-                {    //constructor and classname both are matching
 
-                    Assembly assembly = Assembly.GetExecutingAssembly();
-                    Type moodAnalyzerType = assembly.GetType(className);
-                    var res = Activator.CreateInstance(moodAnalyzerType); //Activator class
-                    return res;
-                }
-                catch (NullReferenceException)
+                if (type.Name.Equals(constructorName))
                 {
-                    throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND, "class not found");//class name not maching that time we run
+                    ConstructorInfo constructorObject = type.GetConstructor(new[] { typeof(string) });
+                    Object instance = constructorObject.Invoke(new object[] { message });
+                    return instance;
+                }
+                else
+                {
+                    throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.NO_SUCH_METHOD, "Constructor not found");
                 }
             }
             else
             {
-                throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.CONSTRUCTOR_NOT_FOUND, "constructor not found");//Constructor name not maching that time we run
+                throw new MoodAnalyzerException(MoodAnalyzerException.ExceptionType.CLASS_NOT_FOUND, "Class not found");
+
             }
         }
-
 
     }
 }
